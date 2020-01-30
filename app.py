@@ -7,7 +7,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-    main_page = render_template('index.html', data=data)
+    choice_tours = []
+    for key in data.tours:
+        choice_tours.append(key)
+    choice_tour = random.sample(choice_tours, 6)
+    main_page = render_template('index.html', choice_tour=choice_tour, data=data)
     return main_page
 
 
@@ -18,7 +22,6 @@ def direction(direction):
     nights = []
     for key in data.tours:
         if data.tours[key]["departure"] == direction:
-            print(data.tours[key]["departure"])
             dir_from[key] = data.tours[key]
             prices.append(data.tours[key]["price"])
             nights.append(data.tours[key]["nights"])
@@ -44,4 +47,3 @@ def server_error(e):
 
 if __name__ == '__main__':
     app.run()
-
