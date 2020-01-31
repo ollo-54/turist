@@ -15,7 +15,7 @@ def main():
     return main_page
 
 
-@app.route('/from/<direction>/')
+@app.route('/departure/<direction>/')
 def direction(direction):    
     dir_from = {}
     prices = []
